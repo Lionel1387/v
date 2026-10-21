@@ -29,9 +29,9 @@ export default function Navbar() {
   return (
     <header className={`nav${open ? ' open' : ''}`} id="nav">
       <div className="nav-bar">
-        <a className="brand" href="#top" aria-label="BiolabNativo, inicio">
+        <a className="brand" href="#top" aria-label="BioLab Nativo, inicio">
           <Icon name="leaf" />
-          <span>BiolabNativo</span>
+          <span>BioLab Nativo</span>
         </a>
         <nav className="nav-links" aria-label="Principal">
           {navLinks.map(l => (

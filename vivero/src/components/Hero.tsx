@@ -43,23 +43,23 @@ export default function Hero() {
         </div>
         <div className="hero-shade" />
         <div className="hero-content">
-          <p className="eyebrow hero-in" style={idx(0)}>Vivero de especies nativas</p>
+          <p className="eyebrow hero-in" style={idx(0)}>Educación ambiental · ISEP, Córdoba</p>
           <h1 className="hero-title">
-            <span className="line"><span style={idx(1)}>Naturaleza nativa.</span></span>
-            <span className="line"><span style={idx(2)}>Cultivada con ciencia.</span></span>
+            <span className="line"><span style={idx(1)}>Corredor educativo</span></span>
+            <span className="line"><span style={idx(2)}>BioLab Nativo.</span></span>
           </h1>
           <p className="hero-sub hero-in" style={idx(3)}>
-            Un invernadero, un bosque urbano y un jardín biodiverso, construidos desde cero por estudiantes.
+            Un aula abierta donde estudiantes y docentes aprenden biodiversidad, producción vegetal y sustentabilidad con la experiencia directa.
           </p>
           <div className="hero-actions hero-in" style={idx(4)}>
             <a className="btn btn-primary" href="#historia">Conocé la historia</a>
-            <a className="btn btn-ghost" href="#contacto">Visitanos <Icon name="arrow" /></a>
+            <a className="btn btn-ghost" href="#contacto">Visitas <Icon name="arrow" /></a>
           </div>
         </div>
         <ul className="hero-chips hero-in" style={idx(5)} aria-label="Espacios del vivero">
           <li><Icon name="greenhouse" />Invernadero</li>
           <li><Icon name="tree" />Bosque urbano</li>
-          <li><Icon name="sprout" />Jardín biodiverso</li>
+          <li><Icon name="sprout" />Huerta agroecológica</li>
         </ul>
         <a className="scroll-hint" href="#manifiesto" aria-label="Ir a la siguiente sección">
           <Icon name="chev-d" />

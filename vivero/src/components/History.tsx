@@ -53,7 +53,7 @@ export default function History() {
         <header className="section-head reveal">
           <p className="eyebrow eyebrow-green">Nuestra historia</p>
           <h2>Cuatro etapas.<br />Una misma idea.</h2>
-          <p className="lead">Así pasó el vivero de un terreno vacío a un lugar vivo. Recorré cada etapa.</p>
+          <p className="lead">Del invernadero en desuso al corredor en producción, durante 2026. Recorré cada etapa.</p>
         </header>
       </div>
 
