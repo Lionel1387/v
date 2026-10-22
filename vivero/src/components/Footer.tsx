@@ -5,7 +5,10 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-in">
         <a className="brand" href="#top"><Icon name="leaf" /><span>BioLab Nativo</span></a>
-        <p>Corredor Educativo BioLab Nativo · ISEP, Córdoba. © {new Date().getFullYear()}</p>
+        <p>
+          Créditos: Escuela Experimental con Énfasis en TIC Rebeca Guber.
+          Estudiantes de primero a sexto año.
+        </p>
       </div>
     </footer>
   );

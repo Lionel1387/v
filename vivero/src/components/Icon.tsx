@@ -1,4 +1,6 @@
 // Iconos estilo SF Symbols: un sprite SVG en el layout y <Icon name="..."/> para usarlos.
+const aspa = <path d="M12 10.3c-.6-3.4.2-6.3 2.6-6.8 2.2-.4 3.4 1.7 2.4 3.9-.8 1.6-2.4 2.6-4.1 3.5" />;
+
 const symbols: Record<string, React.ReactNode> = {
   leaf: <><path d="M20 4C10 4 5 9 5 15a5 5 0 0 0 5 5c6 0 10-5 10-16z" /><path d="M5 20c2-5 5-8 9-10" /></>,
   greenhouse: <><path d="M3 20v-8.5L12 4l9 7.5V20z" /><path d="M3 11.5h18M9 20v-8.5M15 20v-8.5M12 4v7.5" /></>,
@@ -19,6 +21,9 @@ const symbols: Record<string, React.ReactNode> = {
   'chev-r': <path d="m9 5 7 7-7 7" />,
   'chev-d': <path d="m5 9 7 7 7-7" />,
   x: <path d="M6 6l12 12M18 6 6 18" />,
+  thermo: <><path d="M10 14.3V5a2 2 0 0 1 4 0v9.3a4 4 0 1 1-4 0z" /><path d="M12 9.5v7" /></>,
+  rain: <><path d="M7.5 15a4 4 0 0 1-.4-8 5.5 5.5 0 0 1 10.5 1.5A3.3 3.3 0 0 1 17 15z" /><path d="m8.5 18-1 2.5M12.5 18l-1 2.5M16.5 18l-1 2.5" /></>,
+  fan: <><circle cx="12" cy="12" r="1.6" />{aspa}<g transform="rotate(120 12 12)">{aspa}</g><g transform="rotate(240 12 12)">{aspa}</g></>,
   cpu: <><rect x="6" y="6" width="12" height="12" rx="2.5" /><rect x="9.5" y="9.5" width="5" height="5" rx="1" /><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3" /></>,
 };
 

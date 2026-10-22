@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { chapters } from '@/lib/data';
 import Rail from './Rail';
@@ -82,6 +83,15 @@ export default function History() {
               <h3>{c.tab}</h3>
               <p className="chapter-title">{c.title}</p>
               <p>{c.text}</p>
+              <div className="chapter-by">
+                <span>Mayor colaboración</span>
+                {c.schools.map(s => (
+                  <span className="by-school" key={s.name}>
+                    <Image src={s.logo} alt="" width={36} height={36} />
+                    {s.name}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <Rail ids={c.photos} />

@@ -42,6 +42,7 @@ export const photos = {
   'partida-06': { src: '/img/partida-06.jpg', width: 1200, height: 1600, alt: "Estudiantes terminando el techo del invernadero desde una escalera" },
   'partida-07': { src: '/img/partida-07.jpg', width: 1200, height: 1600, alt: "Estudiantes plantando en la ladera verde" },
   'partida-08': { src: '/img/partida-08.jpg', width: 1800, height: 1350, alt: "El invernadero terminado, visto desde afuera" },
+  'tablero': { src: '/img/tablero.jpg', width: 1350, height: 1800, alt: "Tablero eléctrico del invernadero con inversor, controlador solar y batería" },
   'partida-09': { src: '/img/partida-09.jpg', width: 1800, height: 1350, alt: "Interior del invernadero todavía vacío" },
 } satisfies Record<string, Photo>;
 

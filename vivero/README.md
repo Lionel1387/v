@@ -29,5 +29,6 @@ Los componentes que necesitan interacción son Client Components: `Navbar`, `Her
 
 ## Para completar antes de publicar
 
+- Sección "En vivo" (`src/components/Live.tsx`): hoy muestra datos de ejemplo fijos de `enVivo` en `src/lib/data.ts`. Cuando el backend esté listo, reemplazarlos por los datos reales y poner `demo: false` para ocultar el aviso.
 - Contacto: `src/lib/data.ts` (`contact`: WhatsApp, email, Instagram) y `src/components/Contact.tsx` (dirección y horarios).
 - Dominio: definí `NEXT_PUBLIC_SITE_URL` para que las imágenes de redes sociales (Open Graph) tengan URL absoluta.
