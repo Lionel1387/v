@@ -31,7 +31,7 @@ Ventiladores y electroválvulas se pueden encender de a uno (interruptor de cada
 - **Riego externo:** las mismas reglas para todos los canteros o individuales por cantero. Cada regla (humedad mínima, humedad objetivo, duración por ciclo, espera, horario y días) se habilita o deshabilita con su propio interruptor.
 - **Ventilación:** temperatura de encendido y de apagado, tiempo mínimo entre cambios de estado y horarios permitidos.
 
-Los umbrales de humedad configurados también definen cuándo una mesa o un cantero muestra "Necesita riego". La configuración se guarda en el `localStorage` del navegador (clave `biolab-panel-config-v1`) y el botón "Restablecer valores" vuelve a los valores de `src/lib/config.ts`. El modo automático todavía no ejecuta las reglas: eso lo hará el backend.
+Los umbrales de humedad configurados también definen cuándo una mesa o un cantero muestra "Necesita riego". La configuración se guarda sola en el backend (`PUT /configuracion`) un instante después de cada cambio, y el backend la aplica a los grupos que están en modo automático. El botón "Restablecer valores" vuelve a los valores de `src/lib/config.ts`.
 
 ## Estructura
 
@@ -44,18 +44,18 @@ src/
 │   ├── ajustes.tsx    controles de Configuración (listas, stepper, segmentado, días, franjas)
 │   └── vistas/        Estacion, Internos, Externos y Configuracion
 └── lib/
-    ├── data.ts        tipos (siguen database/init/001_schema.sql), umbrales y datos de ejemplo
+    ├── data.ts        tipos (los que devuelve el backend) y umbrales
     ├── config.ts      tipos y valores iniciales de las reglas automáticas
-    ├── useConfiguracion.ts  configuración guardada en localStorage
-    ├── useInvernadero.ts  estado y acciones (datos fijos, solo frontend)
+    ├── useConfiguracion.ts  configuración guardada en el backend
+    ├── useInvernadero.ts  estado en vivo (SSE) y acciones sobre los equipos
     └── format.ts      "hace X min", puntos cardinales, estado de humedad
 ```
 
-## Conectar con el backend
+## Conexión con el backend
 
-Por ahora el panel es solo frontend: los valores están fijos en `datosDeEjemplo()` (`src/lib/data.ts`) y los interruptores solo cambian el estado en el navegador (al recargar vuelven a los valores iniciales). Para usar datos reales hay que reemplazar en `useInvernadero`:
+El panel lee y escribe todo en el backend (`backend/`, por defecto `http://localhost:4000`; se cambia con `NEXT_PUBLIC_API_URL`):
 
-- la carga inicial por un `fetch()` al backend (o WebSocket/SSE para tiempo real),
-- `setVentilador` y `setValvula` por llamadas que manden la orden al equipo.
+- `useInvernadero` recibe el estado por Server-Sent Events (`/invernadero/eventos`), así que los cambios hechos desde otro panel o por el modo automático aparecen al instante. Los interruptores mandan `PATCH` al backend.
+- `useConfiguracion` lee y guarda las reglas con `GET` y `PUT /configuracion`.
 
 Los umbrales de humedad (`UMBRAL_RIEGO` = 35 %, `UMBRAL_SATURADO` = 80 %) están en `src/lib/data.ts`.

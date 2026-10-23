@@ -1,8 +1,13 @@
-import { enVivo, humedadMinima } from '@/lib/data';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { humedadMinima, type EnVivo } from '@/lib/data';
+import { adaptar } from '@/lib/enVivo';
 import { Icon } from './Icon';
 import Plano from './Plano';
 
 // Estado actual del vivero, solo para mirar: interior y exterior separados por una línea.
+// Arranca con los datos de la primera carga y se actualiza solo con cada evento del backend.
 const uno = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 function Dato({ icon, label, value, unit }: { icon: string; label: string; value: string; unit: string }) {
@@ -48,11 +53,30 @@ function Suelo({ titulo, nombre, valores }: { titulo: string; nombre: string; va
   );
 }
 
+// Mismo host que la página, puerto del backend; se puede fijar con NEXT_PUBLIC_API_URL
+const urlApi = () => process.env.NEXT_PUBLIC_API_URL ?? `${location.protocol}//${location.hostname}:4000`;
+
+function useEnVivo(inicial: EnVivo) {
+  const [datos, setDatos] = useState(inicial);
+  useEffect(() => {
+    // EventSource se reconecta solo si el backend se corta
+    const fuente = new EventSource(`${urlApi()}/invernadero/eventos`);
+    fuente.onmessage = e => {
+      try {
+        setDatos(adaptar(JSON.parse(e.data)));
+      } catch {}
+    };
+    return () => fuente.close();
+  }, []);
+  return datos;
+}
+
 const lista = (nums: number[], uno: string, varios: string) =>
   nums.length === 1 ? `${uno} ${nums[0]}` : `${varios} ${nums.slice(0, -1).join(', ')} y ${nums[nums.length - 1]}`;
 
-export default function Live() {
-  const { interior, exterior } = enVivo;
+export default function Live({ inicial }: { inicial: EnVivo }) {
+  const datos = useEnVivo(inicial);
+  const { interior, exterior } = datos;
   const ventOn = interior.ventiladores.filter(Boolean).length;
   const mesas = interior.riego.flatMap((on, i) => (on ? [i + 1] : []));
   const canteros = exterior.riego.flatMap((on, i) => (on ? [i + 1] : []));
@@ -68,7 +92,7 @@ export default function Live() {
           </p>
         </header>
 
-        <Plano />
+        <Plano datos={datos} />
 
         <div className="live reveal" style={{ '--d': '.1s' } as React.CSSProperties}>
           <div className="live-side">
@@ -114,7 +138,7 @@ export default function Live() {
           </div>
         </div>
 
-        {enVivo.demo && <p className="live-note">Vista previa con datos de ejemplo. Pronto se van a mostrar las mediciones reales.</p>}
+        {datos.demo && <p className="live-note">Vista previa con datos de ejemplo: en este momento no se pudieron leer las mediciones reales.</p>}
       </div>
     </section>
   );

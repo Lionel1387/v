@@ -1,4 +1,4 @@
-import { enVivo, humedadMinima } from '@/lib/data';
+import { humedadMinima, type EnVivo } from '@/lib/data';
 
 // Plano del vivero visto desde arriba. Muestra en vivo qué válvulas riegan y qué ventiladores giran,
 // con los mismos datos que la sección "En vivo". Las posiciones salen de las fotos del invernadero:
@@ -101,8 +101,8 @@ function Cantero({ x, y, n, regando, humedad }: { x: number; y: number; n: numbe
   );
 }
 
-export default function Plano() {
-  const { interior, exterior } = enVivo;
+export default function Plano({ datos }: { datos: EnVivo }) {
+  const { interior, exterior } = datos;
   const mesasRegando = interior.riego.flatMap((on, i) => (on ? [i + 1] : []));
   const ventOn = interior.ventiladores.filter(Boolean).length;
   const resumen =

@@ -76,7 +76,10 @@ export function TarjetaEquipo({ icono, nombre, encendido, estado, detalle, onCha
   return (
     <article className={`card equipo${encendido ? ' on' : ''}`}>
       <div className="equipo-top">
-        <span className={`equipo-ico ${animacion}`}><Icon name={icono} /></span>
+        <span className={`equipo-ico ${animacion}`}>
+          <Icon name={icono} />
+          {animacion === 'gotear' && <span className="gotas" aria-hidden="true"><i /><i /><i /></span>}
+        </span>
         <Switch
           checked={encendido}
           onChange={onChange}

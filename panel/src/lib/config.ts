@@ -1,5 +1,5 @@
-// Reglas del modo automático. Por ahora solo viven en el navegador (ver useConfiguracion);
-// cuando exista el backend, este mismo objeto es el que hay que enviarle.
+// Reglas del modo automático. Se guardan en el backend (ver useConfiguracion), que las aplica.
+// Los tipos están copiados en backend/src/configuracion/configuracion.types.ts: si cambia uno, cambiar el otro.
 import { UMBRAL_RIEGO } from './data';
 
 export const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];

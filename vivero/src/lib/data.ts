@@ -107,8 +107,17 @@ export const contact = {
 };
 
 // Estado del vivero para la sección "En vivo" (solo lectura, para el público).
-// Por ahora son datos de ejemplo fijos; más adelante vendrán del backend.
-export const enVivo = {
+// Los datos reales vienen del backend (ver lib/enVivo.ts); estos se muestran si no responde.
+export type EnVivo = {
+  demo: boolean;
+  interior: { temperatura: number; humedad: number; ventiladores: boolean[]; riego: boolean[]; suelo: number[] };
+  exterior: {
+    temperatura: number; humedad: number; viento: number; direccionViento: string;
+    precipitacion: number; riego: boolean[]; suelo: number[];
+  };
+};
+
+export const enVivoEjemplo: EnVivo = {
   demo: true,
   interior: {
     temperatura: 26.4,                                   // °C

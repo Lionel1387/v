@@ -10,13 +10,20 @@ import Estacion from './vistas/Estacion';
 import Externos from './vistas/Externos';
 import Internos from './vistas/Internos';
 
+const textoConfig = {
+  cargando: 'Cargando configuración…',
+  guardando: 'Guardando…',
+  guardada: 'Guardada en el servidor',
+  error: 'Sin conexión: los cambios no se guardan',
+} as const;
+
 const esVista = (s: string): s is Vista => vistas.some(v => v.id === s);
 const secciones = [...new Set(vistas.map(v => v.seccion))];
 
 export default function Panel() {
   const [vista, setVista] = useState<Vista>('estacion');
-  const { datos, setVentilador, setValvula, setAutomatico } = useInvernadero();
-  const { config, setConfig, restablecer } = useConfiguracion();
+  const { datos, error, setVentilador, setValvula, setAutomatico } = useInvernadero();
+  const { config, setConfig, restablecer, estado: estadoConfig } = useConfiguracion();
   const ahora = useAhora();
 
   // La vista elegida queda en la URL (#internos) para poder compartirla o recargar
@@ -37,7 +44,7 @@ export default function Panel() {
   };
 
   const actual = vistas.find(v => v.id === vista)!;
-  const enLinea = datos !== null;
+  const enLinea = datos !== null && error === null;
 
   const boton = (v: (typeof vistas)[number]) => (
     <button
@@ -72,8 +79,8 @@ export default function Panel() {
         <div className="sidebar-pie">
           <span className={`estado-dot${enLinea ? ' ok' : ''}`} />
           <div>
-            <strong>Solo frontend</strong>
-            <span>Sin backend conectado</span>
+            <strong>{enLinea ? 'Conectado' : 'Sin conexión'}</strong>
+            <span>{enLinea ? 'Datos de la base de datos' : error ?? 'Conectando con el backend…'}</span>
           </div>
         </div>
       </aside>
@@ -85,8 +92,8 @@ export default function Panel() {
             <h1>{actual.titulo}</h1>
           </div>
           <p className="toolbar-act">
-            <span className={`estado-dot${enLinea ? ' ok' : ''}`} />
-            {vista === 'config' ? 'Se guarda en este navegador' : datos ? 'Datos de ejemplo' : 'Cargando…'}
+            <span className={`estado-dot${(vista === 'config' ? estadoConfig !== 'error' : enLinea) ? ' ok' : ''}`} />
+            {vista === 'config' ? textoConfig[estadoConfig] : error ? 'Sin conexión con el backend' : datos ? 'En vivo' : 'Cargando…'}
           </p>
         </header>
 
@@ -94,7 +101,9 @@ export default function Panel() {
           {vista === 'config' ? (
             <Configuracion config={config} setConfig={setConfig} restablecer={restablecer} />
           ) : !datos ? (
-            <div className="cargando" aria-live="polite">Cargando datos…</div>
+            <div className="cargando" aria-live="polite">
+              {error ? `No se pudieron cargar los datos: ${error}` : 'Cargando datos…'}
+            </div>
           ) : vista === 'estacion' ? (
             <Estacion datos={datos.estacion} />
           ) : vista === 'internos' ? (

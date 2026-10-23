@@ -1,5 +1,5 @@
-// Tipos y datos de ejemplo del invernadero.
-// Los campos siguen las tablas de database/init/001_schema.sql para que conectar el backend sea directo.
+// Tipos del invernadero. Son los que devuelve GET /invernadero del backend
+// (backend/src/invernadero/invernadero.types.ts): si cambia uno, cambiar el otro.
 
 export type Ventilador = { id: number; nombre: string; encendido: boolean };
 
@@ -48,34 +48,3 @@ export const vistas: { id: Vista; titulo: string; corto: string; icono: string; 
 // Por debajo de UMBRAL_RIEGO la tierra pide agua; por encima de UMBRAL_SATURADO está encharcada
 export const UMBRAL_RIEGO = 35;
 export const UMBRAL_SATURADO = 80;
-
-const min = 60_000;
-
-export function datosDeEjemplo(ahora: number): Invernadero {
-  const valvula = (id: number, nombre: string, haceMin: number | null): Valvula =>
-    ({ id, nombre, encendida: false, ultimaActivacion: haceMin === null ? null : ahora - haceMin * min });
-
-  return {
-    automatico: { ventilacion: false, riegoInterno: false, riegoExterno: false },
-    ventiladores: [1, 2, 3, 4].map(id => ({ id, nombre: `Ventilador ${id}`, encendido: id <= 2 })),
-    valvulasInternas: [
-      valvula(1, 'Mesa 1', 35),
-      valvula(2, 'Mesa 2', 140),
-      valvula(3, 'Mesa 3', 12),
-      valvula(4, 'Mesa 4', 60 * 26),
-      valvula(5, 'Mesa 5', 300),
-      valvula(6, 'Mesa 6', null),
-    ],
-    humedadMesas: [62, 48, 71, 29, 44, 22].map((humedad, i) => ({ id: i + 1, nombre: `Mesa ${i + 1}`, humedad })),
-    ambiente: { temperatura: 26.4, humedad: 68 },
-    valvulasExternas: [
-      valvula(1, 'Cantero 1', 90),
-      valvula(2, 'Cantero 2', 60 * 30),
-      valvula(3, 'Cantero 3', 20),
-      valvula(4, 'Cantero 4', 60 * 5),
-    ],
-    humedadCanteros: [52, 31, 66, 40].map((humedad, i) => ({ id: i + 1, nombre: `Cantero ${i + 1}`, humedad })),
-    estacion: { temperatura: 18.6, velocidadViento: 14, direccionViento: 315, humedad: 54, precipitacion: 0 },
-    actualizado: ahora,
-  };
-}
