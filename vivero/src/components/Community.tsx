@@ -12,10 +12,10 @@ export default function Community() {
           <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="(max-width: 860px) 100vw, 55vw" />
         </div>
         <div className="split-text reveal" style={{ '--d': '.1s' } as React.CSSProperties}>
-          <p className="eyebrow eyebrow-green">Hecho por personas</p>
+          <p className="eyebrow eyebrow-green">Trabajo interinstitucional</p>
           <h2>Aprender<br />haciendo.</h2>
           <p className="lead">
-            BiolabNativo no se compró hecho: lo levantaron estudiantes y docentes, paso a paso, entre planos, herramientas y mucha tierra.
+            El corredor nace en el Campus de Innovación Educativa, con la Subsecretaría de Biodiversidad y el Ministerio de Educación de Córdoba. Cada escuela acredita saberes según su especialidad.
           </p>
           <ul className="feature-list">
             {features.map(f => (

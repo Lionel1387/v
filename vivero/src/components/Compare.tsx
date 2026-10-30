@@ -41,7 +41,7 @@ export default function Compare() {
       <div className="container">
         <header className="section-head center reveal">
           <p className="eyebrow eyebrow-green">Antes y hoy</p>
-          <h2>De estructura vacía<br />a invernadero vivo.</h2>
+          <h2>De invernadero en desuso<br />a invernadero en producción.</h2>
           <p className="lead">Deslizá para ver el mismo lugar en dos momentos distintos.</p>
         </header>
 

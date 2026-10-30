@@ -9,9 +9,9 @@ export default function Bento() {
       <div className="container">
         <header className="section-head reveal">
           <p className="eyebrow eyebrow-green">Los espacios</p>
-          <h2>Todo lo que crece<br />en un mismo lugar.</h2>
+          <h2>Cuatro líneas de trabajo<br />en un mismo corredor.</h2>
           <p className="lead">
-            Cada rincón del vivero cumple una función: producir, cuidar, aprender y mostrar cómo conviven la tecnología y la naturaleza.
+            Invernadero, huerta agroecológica, bosque urbano y compostaje: el estudio de cómo interactúan los sistemas vivos, productivos y tecnológicos.
           </p>
         </header>
 

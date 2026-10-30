@@ -5,12 +5,12 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
-  title: 'BiolabNativo — Vivero de especies nativas',
+  title: 'BioLab Nativo — Corredor educativo',
   description:
-    'BiolabNativo: un vivero de especies nativas con invernadero, bosque urbano y jardín biodiverso, construido desde cero por estudiantes.',
+    'Corredor Educativo BioLab Nativo: espacio de educación ambiental del ISEP en Córdoba con invernadero, huerta agroecológica, bosque urbano y compostaje.',
   openGraph: {
-    title: 'BiolabNativo — Vivero de especies nativas',
-    description: 'Un invernadero, un bosque urbano y un jardín biodiverso construidos desde cero por estudiantes.',
+    title: 'BioLab Nativo — Corredor educativo',
+    description: 'Un aula abierta para aprender biodiversidad, producción vegetal y sustentabilidad.',
     images: ['/img/hoy-06.jpg'],
     locale: 'es_AR',
     type: 'website',

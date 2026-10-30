@@ -17,10 +17,10 @@ export default function Contact() {
     <section className="section dark contact" id="contacto">
       <div className="container contact-grid">
         <div className="reveal">
-          <p className="eyebrow eyebrow-green">Visitanos</p>
-          <h2>Venite a<br />conocerlo.</h2>
+          <p className="eyebrow eyebrow-green">Visitas</p>
+          <h2>Venite a<br />aprender.</h2>
           <p className="lead">
-            Coordiná una visita para recorrer el invernadero, el bosque urbano y el jardín biodiverso.
+            Recibimos delegaciones escolares de distintos niveles para aprender con la indagación, la observación de la naturaleza y la tecnología.
           </p>
           <div className="hero-actions">
             <a className="btn btn-primary" href={contact.whatsapp} target="_blank" rel="noopener noreferrer">
